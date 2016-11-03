@@ -7,10 +7,11 @@ import {
   TouchableHighlight
 } from 'react-native';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 
 import UserDogs from './UserDogs';
 
-import { fetchUser, updateUser } from '../actions/index';
+import { fetchUser, updateUser, updateEditUserForm } from '../actions/index';
 
 const styles = require('../style');
 
@@ -21,10 +22,6 @@ class UserEdit extends Component {
     // Initialize Playdate Attributes
     this.state = {
       id: "",
-      username: "",
-      name: "",
-      email: "",
-      password: "",
       loaded: false,
     };
   }
@@ -37,19 +34,6 @@ class UserEdit extends Component {
   // Performs an Ajax call to retrieve information about the user
   fetchData() {
     console.log("fetchData: UserEdit: user_id", this.props.user_id);
-    // fetch(REQUEST_URL + this.props.user_id)
-    //   .then((response) => response.json())
-    //   .then((responseData) => {
-    //     // Update the state with the information about the playdate
-    //     this.setState({
-    //       id: responseData.id,
-    //       name: responseData.name,
-    //       username: responseData.username,
-    //       email: responseData.email,
-    //       loaded: true,
-    //     });
-    //   })
-    //   .done();
 
     this.props.fetchUser(this.props.user_id)
       .then(() => {
@@ -57,10 +41,13 @@ class UserEdit extends Component {
 
         this.setState({
           id: responseData.id,
+          loaded: true,
+        });
+
+        this.props.updateEditUserForm({
           name: responseData.name,
           username: responseData.username,
           email: responseData.email,
-          loaded: true,
         });
       });
   }
@@ -100,32 +87,34 @@ class UserEdit extends Component {
     //   })
     //   .done();
 
+    const { username, name, email, password } = this.props;
+
     const user = {
-      username: this.state.username,
-      name: this.state.name,
-      email: this.state.email,
+      username,
+      name,
+      email,
     };
 
-    if (this.state.password !== undefined || this.state.password !== '') {
-      user.password = this.state.password;
+    // add password only if it was typed
+    if (password !== undefined || password !== '') {
+      user.password = password;
     }
 
     console.log("Edit user submit");
 
     this.props.updateUser(this.props.user.id, user)
       .then(() => {
-        this.props.navigator.pop({
-          title: 'Profile',
-          component: UserDogs,
-          passProps: {
-            loaded: false,
-          },
-        });
+        // this.props.navigator.pop({
+        //   passProps: {
+        //     loaded: false,
+        //   },
+        // });
+        Actions.pop({ loaded: false });
       });
   }
 
   render() {
-    const user = this.state;
+    const { username, name, email, password, updateEditUserForm } = this.props;
 
     return (
       <View style={styles.container}>
@@ -136,30 +125,30 @@ class UserEdit extends Component {
           <TextInput
             placeholder="Username"
             style={styles.inputText}
-            value={user.username}
-            onChangeText={(text) => this.setState({ username: text })}
+            value={username}
+            onChangeText={username => updateEditUserForm({ username })}
           />
 
           <TextInput
             placeholder="Name"
             style={styles.inputText}
-            value={user.name}
-            onChangeText={(text) => this.setState({ name: text })}
+            value={name}
+            onChangeText={name => updateEditUserForm({ name })}
           />
 
           <TextInput
             placeholder="Email"
             style={styles.inputText}
-            value={user.email}
-            onChangeText={(text) => this.setState({ email: text })}
+            value={email}
+            onChangeText={email => updateEditUserForm({ email })}
           />
 
           <TextInput
             placeholder="Password"
             style={styles.inputText}
-            value={user.password}
+            value={password}
             secureTextEntry
-            onChangeText={(text) => this.setState({ password: text })}
+            onChangeText={password => updateEditUserForm({ password })}
           />
 
           <TouchableHighlight
@@ -176,68 +165,8 @@ class UserEdit extends Component {
   }
 }
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-//   text: {
-//     fontSize: 40,
-//   },
-//   button: {
-//     height: 36,
-//     backgroundColor: "#48bbec",
-//     borderWidth: 1,
-//     borderRadius: 8,
-//     marginBottom: 10,
-//     alignSelf: "stretch",
-//   },
-//   buttonText: {
-//     fontSize: 18,
-//     color: "white",
-//     alignSelf: "center",
-//   },
-//   inputLabel: {
-//     fontWeight: 'bold',
-//   },
-//   inputText: {
-//     height: 30,
-//     borderColor: 'gray',
-//     borderWidth: 1,
-//     borderRadius: 16,
-//     padding: 10,
-//     backgroundColor: '#EBFAFF',
-//     marginBottom: 10,
-//   },
-//   textArea: {
-//     height: 100,
-//   },
-//   input: {
-//     height: 40,
-//   },
-//   pageTitle: {
-//     marginTop: 20,
-//   },
-//   title: {
-//     fontWeight: 'bold',
-//     fontSize: 20,
-//   },
-//   subtitle: {
-//     fontWeight: 'bold',
-//     fontSize: 14,
-//   },
-//   navbar: {
-//     flexDirection: 'row',
-//     justifyContent: 'space-around',
-//     marginTop: 20,
-//     backgroundColor: 'skyblue',
-//     marginBottom: 6,
-//   },
-// });
-
 function mapStateToProps(state) {
-  return { user: state.users.user };
+  return { user: state.users.user, ...state.userEditForm };
 }
 
-export default connect(mapStateToProps, { fetchUser, updateUser })(UserEdit);
+export default connect(mapStateToProps, { fetchUser, updateUser, updateEditUserForm })(UserEdit);

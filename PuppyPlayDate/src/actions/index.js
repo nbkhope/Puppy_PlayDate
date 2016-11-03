@@ -6,6 +6,10 @@ import {
   FETCH_DOG,
   CREATE_DOG,
   UPDATE_DOG,
+  CREATE_DOG_SUCCESS,
+  NEW_DOG_STATE_UPDATE,
+  EDIT_DOG_STATE_UPDATE,
+  EDIT_DOG_SUCESS,
   FETCH_PLAYDATES,
   FETCH_PLAYDATE,
   CREATE_PLAYDATE,
@@ -13,6 +17,7 @@ import {
   FETCH_USER,
   UPDATE_USER,
   FETCH_USER_PLAYDATES,
+  NEW_PLAYDATE_STATE_UPDATE,
   AUTH_USER,
   UNAUTH_USER,
   AUTH_ERROR,
@@ -23,7 +28,9 @@ import {
   CHANGE_SIGNUP_NAME,
   CHANGE_SIGNUP_EMAIL,
   SIGNUP_USER_SUCCESS,
-  SIGNUP_USER_FAIL
+  SIGNUP_USER_FAIL,
+  EDIT_USER_STATE_UPDATE,
+  EDIT_USER_SUCCESS
 } from './types';
 
 const REQUEST_URL = 'http://localhost:3000';
@@ -61,6 +68,10 @@ export function createDog(dog) {
 
   return dispatch => {
     return request.then(response => {
+      dispatch({
+        type: CREATE_DOG_SUCCESS
+      });
+
       return dispatch({
         type: CREATE_DOG,
         payload: response
@@ -80,11 +91,44 @@ export function updateDog(dogId, dog) {
   return dispatch => {
     return request.then(response => {
       console.log(response);
+
+      dispatch({
+        type: EDIT_DOG_SUCESS
+      });
+
       return dispatch({
         type: UPDATE_DOG,
         payload: dog
       });
     });
+  };
+}
+
+export function updateNewDogForm(dog) {
+  return {
+    type: NEW_DOG_STATE_UPDATE,
+    payload: dog
+  };
+}
+
+export function updateEditDogForm(dog) {
+  return {
+    type: EDIT_DOG_STATE_UPDATE,
+    payload: dog
+  };
+}
+
+export function updateEditUserForm(user) {
+  return {
+    type: EDIT_USER_STATE_UPDATE,
+    payload: user
+  };
+}
+
+export function updateNewPlaydateForm(playdate) {
+  return {
+    type: NEW_PLAYDATE_STATE_UPDATE,
+    payload: playdate
   };
 }
 
@@ -145,11 +189,16 @@ export function createPlaydate(playdate) {
   const request = axios.post(`${REQUEST_URL}/playdates`, playdate);
 
   return dispatch => {
-    request.then(response => {
-      dispatch({
+    return request.then(response => {
+      return dispatch({
         type: CREATE_PLAYDATE,
         payload: response
       });
+    })
+    .catch(() => {
+      console.log("Error creating new playdate");
+
+      return Promise.reject();
     });
   };
 }
@@ -229,6 +278,11 @@ export function updateUser(userId, user) {
     return axios.patch(`${REQUEST_URL}/users/${userId}`, user)
       .then((response) => {
         console.log(response);
+
+        dispatch({
+            type: EDIT_USER_SUCCESS
+        });
+
         return dispatch({
           type: UPDATE_USER,
           payload: user
