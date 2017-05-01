@@ -6,6 +6,7 @@ const SubmitButton = (props) => {
     <TouchableHighlight
       style={styles.submitButton}
       onPress={props.onPress}
+      underlayColor={props.underlayColor}
     >
       <Text style={styles.buttonText}>
         {props.children}
