@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet,
   Text,
   TextInput,
   View,
@@ -9,9 +8,10 @@ import {
   TouchableHighlight,
   ScrollView,
 } from 'react-native';
-
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+
+import { InputText } from './form';
 import { fetchDog, updateDog, updateEditDogForm } from '../actions/index';
 
 const styles = require('../style');
@@ -104,23 +104,20 @@ class DogEdit extends Component {
               <Image source={{ uri: this.state.avatar }} style={styles.profileAvatar} />
             </TouchableHighlight>
 
-            <TextInput
+            <InputText
               placeholder="Dog Name"
-              style={styles.inputText}
               value={name}
               onChangeText={name => updateEditDogForm({ name })}
             />
 
-            <TextInput
+            <InputText
               placeholder="Breed"
-              style={styles.inputText}
               value={breed}
               onChangeText={breed => updateEditDogForm({ breed })}
             />
 
-            <TextInput
+            <InputText
               placeholder="Age"
-              style={styles.inputText}
               value={age.toString()}
               onChangeText={age => updateEditDogForm({ age })}
             />
@@ -153,9 +150,8 @@ class DogEdit extends Component {
             // />
             }
 
-            <TextInput
+            <InputText
               placeholder="Favorite Toy"
-              style={styles.inputText}
               value={toy}
               onChangeText={toy => updateEditDogForm({ toy })}
             />

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
-  TextInput,
   View,
   TouchableHighlight,
   AsyncStorage,
@@ -11,6 +10,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Actions } from 'react-native-router-flux';
 
+import { InputText } from '../form';
 // Action creators
 import {
   loginUser,
@@ -105,18 +105,16 @@ class Login extends Component {
                 Your dog also needs to have fun!
               </Text>
 
-              <TextInput
+              <InputText
                 placeholder="Username"
-                style={styles.inputText}
                 value={username}
                 onChangeText={this.onUsernameChange.bind(this)}
                 autoCapitalize={'none'}
                 autoCorrect={false}
               />
 
-              <TextInput
+              <InputText
                 placeholder="Password"
-                style={styles.inputText}
                 secureTextEntry
                 value={password}
                 onChangeText={this.onPasswordChange.bind(this)}
