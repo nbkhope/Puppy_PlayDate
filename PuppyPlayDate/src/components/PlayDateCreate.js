@@ -3,13 +3,13 @@ import {
   AsyncStorage,
   Text,
   TextInput,
-  TouchableHighlight,
   View,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
 import { InputText } from './form';
+import { SubmitButton } from './common';
 import { updateNewPlaydateForm, createPlaydate } from '../actions';
 
 const styles = require('../style');
@@ -118,12 +118,9 @@ class PlayDateCreate extends Component {
             onChangeText={description => updateNewPlaydateForm({ description })}
           />
 
-          <TouchableHighlight
-            style={styles.submitButton}
-            onPress={() => this.onSubmit()}
-          >
-            <Text style={styles.buttonText}>Create Playdate</Text>
-          </TouchableHighlight>
+          <SubmitButton onPress={() => this.onSubmit()}>
+            Create Playdate
+          </SubmitButton>
         </View>
       </View>
     );

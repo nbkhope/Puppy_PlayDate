@@ -3,12 +3,12 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableHighlight,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
 import { InputText } from '../form';
+import { SubmitButton } from '../common';
 // Action Creators
 import {
   registerUser,
@@ -89,14 +89,9 @@ class Register extends Component {
 
           {this.renderErrorMessage()}
 
-          <TouchableHighlight
-            style={styles.submitButton}
-            onPress={this.onSignupPress.bind(this)}
-          >
-            <Text style={styles.buttonText}>
-              Sign Up
-            </Text>
-          </TouchableHighlight>
+          <SubmitButton onPress={this.onSignupPress.bind(this)}>
+            Sign Up
+          </SubmitButton>
         </View>
       </View>
     );

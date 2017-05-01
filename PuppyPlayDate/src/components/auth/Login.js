@@ -11,6 +11,7 @@ import { bindActionCreators } from 'redux';
 import { Actions } from 'react-native-router-flux';
 
 import { InputText } from '../form';
+import { SubmitButton } from '../common';
 // Action creators
 import {
   loginUser,
@@ -124,14 +125,9 @@ class Login extends Component {
 
               {this.renderErrorMessage()}
 
-              <TouchableHighlight
-                style={styles.submitButton}
-                onPress={this.onLoginPress.bind(this)}
-              >
-                <Text style={styles.buttonText}>
-                  Login
-                </Text>
-              </TouchableHighlight>
+              <SubmitButton onPress={this.onLoginPress.bind(this)}>
+                Login
+              </SubmitButton>
             </View>
 
             <View style={styles.pageFooter}>

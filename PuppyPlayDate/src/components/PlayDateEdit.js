@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
-  TouchableHighlight,
   TextInput
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
 import { InputText } from './form';
+import { SubmitButton } from './common';
 import { fetchPlaydate, updateEditPlaydateForm, updatePlaydate } from '../actions/index';
 
 const styles = require('../style');
@@ -111,13 +111,12 @@ class PlayDateEdit extends Component {
             multiline
           />
 
-          <TouchableHighlight
-            style={styles.submitButton}
+          <SubmitButton
             onPress={this.onEditPress.bind(this)}
             underlayColor='#99d9f4'
           >
             <Text style={styles.buttonText}>Update</Text>
-          </TouchableHighlight>
+          </SubmitButton>
         </View>
       </View>
     );
