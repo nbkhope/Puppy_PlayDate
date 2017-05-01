@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
-  TouchableHighlight,
   AsyncStorage,
   Alert
 } from 'react-native';
@@ -10,6 +9,7 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
 import { InputText } from './form';
+import { SubmitButton } from './common';
 import { fetchDog, createDog, updateNewDogForm } from '../actions/index';
 
 const styles = require('../style');
@@ -87,14 +87,9 @@ class DogCreate extends Component {
             onChangeText={toy => updateNewDogForm({ toy })}
           />
 
-          <TouchableHighlight
-            style={styles.submitButton}
-            onPress={() => this.onCreatePress()}
-          >
-            <Text style={styles.buttonText}>
-              Add Dog
-            </Text>
-          </TouchableHighlight>
+          <SubmitButton onPress={() => this.onCreatePress()}>
+            Add Dog
+          </SubmitButton>
         </View>
       </View>
     );
