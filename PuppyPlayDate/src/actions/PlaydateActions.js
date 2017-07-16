@@ -15,11 +15,11 @@ export function fetchPlaydates() {
   const request = axios.get(`${REQUEST_URL}/playdates`);
 
   return dispatch => {
-    request.then(response => {
+    return request.then(response => {
       // Update the playdates after successful request
-      dispatch({
+      return dispatch({
         type: FETCH_PLAYDATES,
-        payload: response
+        payload: response.data
       });
     });
   };
@@ -32,7 +32,7 @@ export function fetchPlaydate(id) {
     return request.then(response => {
       return dispatch({
         type: FETCH_PLAYDATE,
-        payload: response
+        payload: response.data
       });
     });
   };
@@ -47,6 +47,7 @@ export function updateNewPlaydateForm(playdate) {
     payload: playdate
   };
 }
+
 export function createPlaydate(playdate) {
   const request = axios.post(`${REQUEST_URL}/playdates`, playdate);
 
@@ -54,7 +55,7 @@ export function createPlaydate(playdate) {
     return request.then(response => {
       return dispatch({
         type: CREATE_PLAYDATE,
-        payload: response
+        payload: response.data
       });
     })
     .catch(() => {
