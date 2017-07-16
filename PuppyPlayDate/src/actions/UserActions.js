@@ -16,7 +16,7 @@ export function fetchUser(id) {
     return request.then(response => {
       return dispatch({
         type: FETCH_USER,
-        payload: response
+        payload: response.data
       });
     });
   };
@@ -26,10 +26,10 @@ export function fetchUserPlaydates(userId) {
   const request = axios.get(`${REQUEST_URL}/users/${userId}/playdates`);
 
   return dispatch => {
-    request.then(response => {
-      dispatch({
+    return request.then(response => {
+      return dispatch({
         type: FETCH_USER_PLAYDATES,
-        payload: response
+        payload: response.data
       });
     });
   };
@@ -49,7 +49,7 @@ export function updateUser(userId, user) {
   return dispatch => {
     return axios.patch(`${REQUEST_URL}/users/${userId}`, user)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
 
         dispatch({
             type: EDIT_USER_SUCCESS
