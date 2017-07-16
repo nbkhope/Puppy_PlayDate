@@ -4,5 +4,12 @@
     "quotes": 0,
     "arrow-body-style": 0,
     "no-shadow": 0
+  },
+  "env": {
+    "jest": true,
+    "node": true
+  },
+  "globals": {
+    "fetch": true
   }
 }
