@@ -15,9 +15,9 @@ export default function (state = INITIAL_STATE, action) {
     case FETCH_USER_PLAYDATES:
       return { ...state, own: action.payload };
     case FETCH_PLAYDATES:
-      return { ...state, all: action.payload.data };
+      return { ...state, all: action.payload };
     case FETCH_PLAYDATE:
-      return { ...state, playdate: action.payload.data };
+      return { ...state, playdate: action.payload };
     default:
       return state;
   }
