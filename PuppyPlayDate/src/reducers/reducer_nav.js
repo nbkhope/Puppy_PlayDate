@@ -5,8 +5,8 @@ const INITIAL_STATE = {
   route: null
 };
 
-export default function(state = INITIAL_STATE, action) {
-  switch(action.type) {
+export default function (state = INITIAL_STATE, action) {
+  switch (action.type) {
     case SET_NAV:
       return { ...state, navigator: action.payload };
     case SET_ROUTE:
