@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - "node"
+  - "7"
+script: npm test
+cache:
+  directories:
+    - "node_modules"
+before_install:
+  - cd PuppyPlayDate

@@ -15,7 +15,7 @@ const INITIAL_STATE = {
   email: '',
 };
 
-export default function(state = INITIAL_STATE, action) {
+export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
     case SIGNUP_USER_SUCCESS:
       return { ...state, username: '', name: '', password: '', email: '', error: '' };

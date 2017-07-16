@@ -12,7 +12,7 @@ const INITIAL_STATE = {
   avatar: ''
 };
 
-export default function(state = INITIAL_STATE, action) {
+export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
     // Update the state with the property that was changed
     case NEW_DOG_STATE_UPDATE:
