@@ -7,7 +7,7 @@ const INITIAL_STATE = {
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
     case FETCH_USER:
-      return { ...state, user: action.payload.data };
+      return { ...state, user: action.payload };
     case UPDATE_USER:
       return { ...state, user: action.payload };
     default:

@@ -13,7 +13,7 @@ const INITIAL_STATE = {
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
     case FETCH_USER_PLAYDATES:
-      return { ...state, own: action.payload.data };
+      return { ...state, own: action.payload };
     case FETCH_PLAYDATES:
       return { ...state, all: action.payload.data };
     case FETCH_PLAYDATE:
