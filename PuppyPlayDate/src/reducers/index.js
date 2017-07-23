@@ -1,16 +1,16 @@
 import { combineReducers } from 'redux';
 
 // Custom Reducers
-import DogsReducer from './reducer_dogs';
-import PlaydatesReducer from './reducer_playdates';
-import UsersReducer from './reducer_users';
-import AuthReducer from './reducer_auth';
-import SignupReducer from './reducer_signup';
-import DogNewFormReducer from './reducer_dog_new_form';
-import DogEditFormReducer from './reducer_dog_edit_form';
-import UserEditFormReducer from './reducer_user_edit_form';
-import PlaydateNewFormReducer from './reducer_playdate_new_form';
-import PlaydateEditFormReducer from './reducer_playdate_edit_form';
+import DogsReducer from './DogsReducer';
+import PlaydatesReducer from './PlaydatesReducer';
+import UsersReducer from './UsersReducer';
+import AuthReducer from './AuthReducer';
+import SignupReducer from './SignupReducer';
+import DogNewFormReducer from './DogNewFormReducer';
+import DogEditFormReducer from './DogEditFormReducer';
+import UserEditFormReducer from './UserEditFormReducer';
+import PlaydateNewFormReducer from './PlaydateNewFormReducer';
+import PlaydateEditFormReducer from './PlaydateEditFormReducer';
 
 // Combine all reducers here
 // (don't forget to assign key-value pairs)
